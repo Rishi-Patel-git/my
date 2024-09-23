@@ -10,7 +10,7 @@ import seaborn as sns
 import geopandas as gpd
 
 # Load dataset
-df = pd.read_csv('sample_data/zomato_df_final_data.csv')
+df = pd.read_csv('data/zomato_df_final_data.csv')
 df.info()
 df.describe()
 ```
@@ -519,8 +519,8 @@ plt.show()
 
 ```python
 def plot_cuisine_density_map(restaurant_data, geojson_file, cuisine_type):
-    df = pd.read_csv("sample_data/zomato_df_final_data.csv")
-    gdf = gpd.read_file("sample_data/sydney.geojson")
+    df = pd.read_csv("data/zomato_df_final_data.csv")
+    gdf = gpd.read_file("sydney.geojson")
 
     cuisine_counts = df[df['cuisine'].apply(lambda x: cuisine_type in x)].groupby('subzone').size().reset_index(name='count')
     gdf = gdf.merge(cuisine_counts, left_on='SSC_NAME', right_on='subzone', how='left')
@@ -560,7 +560,7 @@ https://public.tableau.com/app/profile/rishi.patel7080/viz/RishiBook/Sheet2?publ
 
 ```python
 from sklearn.impute import SimpleImputer
-df = pd.read_csv('sample_data/zomato_df_final_data.csv')
+df = pd.read_csv('data/zomato_df_final_data.csv')
 print("NaN values before cleaning:", df.isna().sum())
 df = df.dropna(subset=['cost', 'lat', 'lng', 'rating_number', 'rating_text', 'votes'])
 
